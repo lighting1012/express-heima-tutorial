@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(
   expressjwt({ secret, algorithms: ["HS256"] })
   // unless 指定不需要访问权限的路径
-  .unless({ path: ['/api/login']})
+  .unless({ path: ['/api/login', '/api/register']})
 )
 
 // 挂载路由
