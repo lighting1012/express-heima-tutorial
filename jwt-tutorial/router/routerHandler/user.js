@@ -1,8 +1,6 @@
-const express = require('express')
-const { generateJWT } = require('./generateJWT')
-const router = express.Router()
+const { generateJWT } = require('../../generateJWT')
 
-router.post('/login', (req, res) => {
+exports.login = (req, res) => {
   const userInput = req.body
   console.log(req.body)
   if (userInput.username !== 'admin' || userInput.password !== '123456') {
@@ -11,7 +9,6 @@ router.post('/login', (req, res) => {
       message: '用户名密码错误'
     })
   }
-  
   // 生成jwt串
   const token = generateJWT({username: userInput.username})
   return res.send({
@@ -19,6 +16,12 @@ router.post('/login', (req, res) => {
     messaeg: '登录成功！',
     token
   })
-})
+}
 
-module.exports = router
+exports.getInfo = (req, res) => {
+  res.send({
+    status: 200,
+    message: '获取用户信息成功',
+    data: req.auth
+  })
+}
