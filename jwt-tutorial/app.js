@@ -3,7 +3,7 @@ const app = express()
 const router = require('./router')
 
 
-const expressjwt = require('express-jwt')
+const { expressjwt } = require('express-jwt')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const { secret } = require('./generateJWT')
@@ -15,7 +15,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 // 解析jwt
 app.use(
-  expressjwt({ secret })
+  expressjwt({ secret, algorithms: ["HS256"] })
   // unless 指定不需要访问权限的路径
   .unless({ path: ['/api/login']})
 )

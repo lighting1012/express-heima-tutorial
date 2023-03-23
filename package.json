@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "front": "vite --config ./frontend/vite.config.js",
+    "back": "nodemon ./jwt-tutorial/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
