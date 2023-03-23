@@ -10,6 +10,7 @@ npm i
 ```
 npm run frontend
 ```
+前端使用vue3+vite3+axios写了几个简单页面，用来调接口。
 
 ### 运行后端
 ```
