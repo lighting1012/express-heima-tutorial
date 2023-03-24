@@ -4,6 +4,7 @@ import vue from '@vitejs/plugin-vue'
 // 自动引入vant组件
 import Components from 'unplugin-vue-components/vite'
 import { VantResolver } from 'unplugin-vue-components/resolvers'
+import AutoImport from 'unplugin-auto-import/vite'
 
 export default defineConfig({
   root: './frontend',
@@ -30,6 +31,11 @@ export default defineConfig({
     vue(),
     Components({
       resolvers: [VantResolver()]
+    }),
+    // 自动import vue, vue-router
+    AutoImport({
+      imports: ['vue', 'vue-router'],
+      dts: 'frontend/auto-imports.d.ts'
     })
   ]
 })

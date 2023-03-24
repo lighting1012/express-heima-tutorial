@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="box">
-      <div class="title">Login To Start</div>
+      <div class="title">Register Your Account</div>
       <van-form @submit="onSubmit">
         <van-cell-group inset>
           <van-field
@@ -22,22 +22,13 @@
           />
         </van-cell-group>
         <div style="margin: 16px;">
-          <van-button 
-            class="submit-btn" 
-            round 
-            block 
-            type="primary" 
-            native-type="submit">
-            Login
+          <van-button class="submit-btn" round block type="primary" native-type="submit">
+            Register
           </van-button>
         </div>
         <div class="tips">
-          Don't have an account? 
-          <span 
-            class="link" 
-            @click="router.push('/register')">
-            Register
-          </span>
+          Already had an account? 
+          <span class="link" @click="router.push('/login')">Login</span>
         </div>
       </van-form>
     </div>
@@ -45,19 +36,19 @@
 </template>
 <script setup>
 import { ref } from 'vue'
-import { login } from '@/api/auth'
+import { register } from '@/api/auth'
 
 const router = useRouter()
 
-const username = ref('admin')
-const password = ref('123456')
+const username = ref('')
+const password = ref('')
 const onSubmit = (values) => {
   console.log('submit', values)
-  login(values).then(resp => {
+  register(values).then(resp => {
     console.log(resp.data)
   })
 }
 </script>
 <style lang="scss">
-@import '@/styles/login.scss'
+@import '@/styles/login.scss';
 </style>
