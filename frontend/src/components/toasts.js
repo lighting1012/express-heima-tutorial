@@ -5,11 +5,13 @@ export default {
   success: function(message) {
     return Toast.success({
       message,
+      icon: 'checked'
     })
   },
   fail: function(message) {
     return Toast.fail({
       message,
+      icon: 'clear'
     })
   }
 }

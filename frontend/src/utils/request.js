@@ -27,14 +27,16 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
   (res) => {
     console.log('response::', res);
-    toasts.success(res?.data?.message || '成功')
+    if (res.config.showMessage !== false) {
+      toasts.success(res?.data?.message || '成功')
+    }
     const result = res.data
     return result
   },
   (error) => {
     console.log('error::', error);
+    toasts.fail(error?.response?.data?.message || '失败')
     if (error.response.status === 401) {
-      console.log('401');
       router.push('/login')
     }
     return Promise.reject(error)

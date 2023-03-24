@@ -22,6 +22,7 @@ export function login(data) {
 export function getInfo() {
   return request({
     url: '/getInfo',
-    method: 'get'
+    method: 'get',
+    showMessage: false
   })
 }
