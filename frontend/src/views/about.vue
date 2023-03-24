@@ -3,9 +3,9 @@
     <div class="box">
       <div class="title">About</div>
       <ul>
-        <li>Frontend: vue3, vite3, vant3</li>
+        <li>Frontend: vue3, vite3, vant3, axios</li>
         <li>Backend: node, express, jsonwebtoken</li>
-        <li>database: mysql</li>
+        <li>Database: mysql</li>
       </ul>
       <div class="link-group">
         <div class="link" @click="router.push('/home')">Home</div>
