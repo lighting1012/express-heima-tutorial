@@ -7,7 +7,7 @@ const generateJWT = (data) => {
   // params1: 加密的数据
   // params2: 密钥
   // params1: options 过期时间等
-  return jwt.sign(data, secret, { expiresIn: '30s' })
+  return jwt.sign(data, secret, { expiresIn: '30s', algorithm: "HS256" })
 }
 
 module.exports = {

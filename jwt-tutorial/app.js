@@ -26,13 +26,12 @@ app.use('/api', userRouter)
 // 全局错误中间件
 app.use((err, req, res, next) => {
   if (err.name === 'UnauthorizedError') {
-    return res.send({
-      status: 401,
+    return res.status(401).send({
       message: '无效的token'
     })
   }
-  res.send({
-    status: 500,
+  console.error(err.message);
+  res.status(500).send({
     message: '未知错误'
   })
 })

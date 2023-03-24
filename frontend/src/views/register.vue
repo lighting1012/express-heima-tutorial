@@ -36,7 +36,7 @@
 </template>
 <script setup>
 import { ref } from 'vue'
-import { register } from '@/api/auth'
+import { register } from '@/api/user'
 
 const router = useRouter()
 
@@ -49,6 +49,6 @@ const onSubmit = (values) => {
   })
 }
 </script>
-<style lang="scss">
+<style scoped lang="scss">
 @import '@/styles/login.scss';
 </style>

@@ -1,4 +1,4 @@
-import request from "./request"
+import request from "@/utils/request"
 
 // 注册
 export function register(data) {
@@ -15,5 +15,13 @@ export function login(data) {
     url: '/login',
     method: 'post',
     data
+  })
+}
+
+// 获取用户信息
+export function getInfo() {
+  return request({
+    url: '/getInfo',
+    method: 'get'
   })
 }

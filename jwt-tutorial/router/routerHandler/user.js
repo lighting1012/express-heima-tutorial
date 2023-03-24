@@ -8,8 +8,7 @@ const bcrypt = require('bcryptjs')
 exports.register = (req, res) => {
   const userInput = req.body
   if (!userInput.username || !userInput.password) {
-    return res.send({
-      status: 201,
+    return res.status(400).send({
       message: '用户名或密码不合法'
     })
   }
@@ -18,11 +17,11 @@ exports.register = (req, res) => {
   db.query(sqlStr, userInput.username, (err, results) => {
     if (err) {
       // 执行sql语句失败
-      return res.send({ status: 201, message: err.message })
+      return res.status(500).send({ message: err.message })
     }
     if (results.length > 0) {
       // 用户名被占用
-      return res.send({ stauts: 201, message: '用户名已被占用' })
+      return res.status(400).send({ message: '用户名已被占用' })
     }
     // 加密用户的密码
     userInput.password = bcrypt.hashSync(userInput.password, 10)
@@ -32,11 +31,11 @@ exports.register = (req, res) => {
       sql, 
       { username: userInput.username, password: userInput.password },
       (err, results) => {
-        if (err) return res.send({ status: 500, message: err.message })
+        if (err) return res.status(500).send({ message: err.message })
         if (results.affectedRows !== 1) {
-          return res.send({ status: 500, message: '注册失败，请稍后再试' })
+          return res.status(500).send({ message: '注册失败，请稍后再试' })
         }
-        res.send({ stauts: 200, message: '注册成功' })
+        res.status(200).send({ message: '注册成功' })
       })
   })
   // res.send('注册成功')
@@ -47,24 +46,22 @@ exports.login = (req, res) => {
   const userInput = req.body
   console.log(req.body)
   if (userInput.username !== 'admin' || userInput.password !== '123456') {
-    return res.send({
-      stauts: 400,
+    return res.status(400).send({
       message: '用户名密码错误'
     })
   }
   // 生成jwt串
   const token = generateJWT({username: userInput.username})
-  return res.send({
-    status: 200,
+  console.log('token:::', token);
+  return res.status(200).send({
     message: '登录成功！',
-    token
+    data: { token }
   })
 }
 
 // 获取用户信息
 exports.getInfo = (req, res) => {
-  res.send({
-    status: 200,
+  res.status(200).send({
     message: '获取用户信息成功',
     data: req.auth
   })

@@ -2,7 +2,7 @@
   <div class="container">
     <div class="box">
       <div class="title">Login To Start</div>
-      <van-form @submit="onSubmit">
+      <van-form>
         <van-cell-group inset>
           <van-field
             v-model="username"
@@ -27,7 +27,8 @@
             round 
             block 
             type="primary" 
-            native-type="submit">
+            native-type="submit"
+            @click="onSubmit">
             Login
           </van-button>
         </div>
@@ -45,19 +46,26 @@
 </template>
 <script setup>
 import { ref } from 'vue'
-import { login } from '@/api/auth'
+import { login } from '@/api/user'
+import { setToken } from '@/utils/auth'
 
 const router = useRouter()
 
 const username = ref('admin')
 const password = ref('123456')
-const onSubmit = (values) => {
-  console.log('submit', values)
-  login(values).then(resp => {
-    console.log(resp.data)
+const onSubmit = () => {
+  const data = {
+    username: username.value,
+    password: password.value
+  }
+  login(data).then(resp => {
+    console.log('login::', resp);
+    const token = resp.data?.token
+    setToken(token)
+    router.push('/')
   })
 }
 </script>
-<style lang="scss">
-@import '@/styles/login.scss'
+<style scoped lang="scss">
+@import '@/styles/login.scss';
 </style>
