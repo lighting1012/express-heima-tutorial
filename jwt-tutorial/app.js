@@ -12,7 +12,7 @@ const { secret } = require('./generateJWT')
 app.use(cors())
 // 解析body中间件
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: false }))
+// app.use(bodyParser.urlencoded({ extended: false }))
 // 解析jwt中间件，配置成功后会把解析后的用户信息挂载在req.auth上
 app.use(
   expressjwt({ secret, algorithms: ["HS256"] })
